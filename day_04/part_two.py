@@ -1,13 +1,10 @@
 input = open("day_04\input.txt", "r")
 
 total_cards = 0
-
 amount_dict = dict()
-
 card_num = 0
 
-for line in input:
-    
+for line in input:    
     card_num += 1
 
     if card_num in amount_dict:
