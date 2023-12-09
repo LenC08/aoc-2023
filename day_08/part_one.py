@@ -2,19 +2,14 @@ import re
 
 input = [line.rstrip() for line in open("day_08\input.txt", "r")]
 
-directions = list(input[0])
-direction_counter = 0
-steps = 0
+temp_data = [[re.sub(r'\W+', '', x) for x in line.split()] for line in input[2:]]
+input_data = {x[0] : (x[2], x[3]) for x in temp_data}
 
+steps = 0
 current_location = "AAA"
 
-while current_location != "ZZZ":
-    for i in range(2, len(input)):
-        parsed_line = [re.sub(r'\W+', '', x) for x in input[i].split()]
-        if parsed_line[0] == current_location:
-            current_location = parsed_line[2] if directions[direction_counter] == "L" else parsed_line[3]
-            steps += 1
-            direction_counter += 1
-            if direction_counter == len(directions): direction_counter = 0
-            break
+while current_location != "ZZZ":  
+    current_location = input_data[current_location][0] if list(input[0])[steps % len(input[0])] == "L" else input_data[current_location][1]
+    steps += 1
+
 print(steps)
